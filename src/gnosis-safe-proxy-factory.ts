@@ -1,16 +1,13 @@
-import { ProxyCreation as ProxyCreationEvent } from "../generated/GnosisSafeProxyFactory/GnosisSafeProxyFactory"
-import { ProxyCreation } from "../generated/schema"
+import { ProxyCreation as ProxyCreationEvent } from '../generated/GnosisSafeProxyFactory/GnosisSafeProxyFactory'
+import { ProxyCreation } from '../generated/schema'
 
-export function handleProxyCreation(event: ProxyCreationEvent): void {
-  let entity = new ProxyCreation(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.proxy = event.params.proxy
-  entity.singleton = event.params.singleton
+export function handleYourEventName(event: YourEventType): void {
+  let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
+  // Now 'id' is a string that combines the transaction hash and log index.
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  // Use 'id' for your entity's ID or wherever you need a unique identifier
+  let entity = new YourEntityName(id)
+  // Set other properties on your entity...
 
   entity.save()
 }
