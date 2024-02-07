@@ -6,3 +6,130 @@ type ProxyCreation @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type AddedOwner @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ApproveHash @entity(immutable: true) {
+  id: Bytes!
+  approvedHash: Bytes! # bytes32
+  owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangedFallbackHandler @entity(immutable: true) {
+  id: Bytes!
+  handler: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangedGuard @entity(immutable: true) {
+  id: Bytes!
+  guard: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangedThreshold @entity(immutable: true) {
+  id: Bytes!
+  threshold: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DisabledModule @entity(immutable: true) {
+  id: Bytes!
+  module: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EnabledModule @entity(immutable: true) {
+  id: Bytes!
+  module: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExecutionFailure @entity(immutable: true) {
+  id: Bytes!
+  txHash: Bytes! # bytes32
+  payment: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExecutionFromModuleFailure @entity(immutable: true) {
+  id: Bytes!
+  module: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExecutionFromModuleSuccess @entity(immutable: true) {
+  id: Bytes!
+  module: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExecutionSuccess @entity(immutable: true) {
+  id: Bytes!
+  txHash: Bytes! # bytes32
+  payment: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RemovedOwner @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SafeReceived @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SafeSetup @entity(immutable: true) {
+  id: Bytes!
+  initiator: Bytes! # address
+  owners: [Bytes!]! # address[]
+  threshold: BigInt! # uint256
+  initializer: Bytes! # address
+  fallbackHandler: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SignMsg @entity(immutable: true) {
+  id: Bytes!
+  msgHash: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

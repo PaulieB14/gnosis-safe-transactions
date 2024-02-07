@@ -6,7 +6,7 @@ dataSources:
     name: GnosisSafeProxyFactory
     network: gnosis
     source:
-      address: "0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2"
+      address: '0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2'
       abi: GnosisSafeProxyFactory
       startBlock: 16236878
     mapping:
@@ -22,3 +22,45 @@ dataSources:
         - event: ProxyCreation(address,address)
           handler: handleProxyCreation
       file: ./src/gnosis-safe-proxy-factory.ts
+  - kind: ethereum
+    name: GnosisSafe
+    network: gnosis
+    source:
+      address: '0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552'
+      abi: GnosisSafe
+      startBlock: 16236998
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddedOwner
+        - ApproveHash
+        - ChangedFallbackHandler
+        - ChangedGuard
+        - ChangedThreshold
+        - DisabledModule
+        - EnabledModule
+        - ExecutionFailure
+        - ExecutionFromModuleFailure
+        - ExecutionFromModuleSuccess
+        - ExecutionSuccess
+        - RemovedOwner
+        - SafeReceived
+        - SafeSetup
+        - SignMsg
+      abis:
+        - name: GnosisSafe
+          file: ./abis/GnosisSafe.json
+      eventHandlers:
+        - event: ExecutionSuccess(bytes32,uint256)
+          handler: handleExecutionSuccess
+        - event: RemovedOwner(address)
+          handler: handleRemovedOwner
+        - event: SafeReceived(indexed address,uint256)
+          handler: handleSafeReceived
+        - event: SafeSetup(indexed address,address[],uint256,address,address)
+          handler: handleSafeSetup
+        - event: SignMsg(indexed bytes32)
+          handler: handleSignMsg
+      file: ./src/gnosis-safe.ts
