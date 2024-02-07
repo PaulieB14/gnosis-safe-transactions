@@ -1,16 +1,3 @@
-schema {
-  query: Query
-}
-
-type Query {
-  addedOwners: [AddedOwner!]! @derivedFrom(field: "owner")
-  removedOwners: [RemovedOwner!]! @derivedFrom(field: "owner")
-  changedThresholds: [ChangedThreshold!]! @derivedFrom(field: "safe")
-  executionSuccesses: [ExecutionSuccess!]! @derivedFrom(field: "safe")
-  executionFailures: [ExecutionFailure!]! @derivedFrom(field: "safe")
-  proxyCreations: [ProxyCreation!]! @derivedFrom(field: "proxy")
-}
-
 type AddedOwner @entity {
   id: ID!
   safe: Bytes! # Address of the Gnosis Safe
