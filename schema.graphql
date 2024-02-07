@@ -7,6 +7,14 @@ type ProxyCreation @entity {
   transactionHash: Bytes!
 }
 
+type SafeReceived @entity {
+  id: ID!
+  sender: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+}
+
 type RemovedOwner @entity {
   id: ID!
   owner: Bytes!
