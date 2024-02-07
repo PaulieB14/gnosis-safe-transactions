@@ -1,134 +1,67 @@
-type ProxyCreation @entity(immutable: true) {
-  id: Bytes!
-  proxy: Bytes! # address
-  singleton: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+schema {
+  query: Query
 }
-type AddedOwner @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
+
+type Query {
+  addedOwners: [AddedOwner!]! @derivedFrom(field: "owner")
+  removedOwners: [RemovedOwner!]! @derivedFrom(field: "owner")
+  changedThresholds: [ChangedThreshold!]! @derivedFrom(field: "safe")
+  executionSuccesses: [ExecutionSuccess!]! @derivedFrom(field: "safe")
+  executionFailures: [ExecutionFailure!]! @derivedFrom(field: "safe")
+  proxyCreations: [ProxyCreation!]! @derivedFrom(field: "proxy")
+}
+
+type AddedOwner @entity {
+  id: ID!
+  safe: Bytes! # Address of the Gnosis Safe
+  owner: Bytes! # Address of the owner added
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type ApproveHash @entity(immutable: true) {
-  id: Bytes!
-  approvedHash: Bytes! # bytes32
-  owner: Bytes! # address
+type RemovedOwner @entity {
+  id: ID!
+  safe: Bytes! # Address of the Gnosis Safe
+  owner: Bytes! # Address of the owner removed
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type ChangedFallbackHandler @entity(immutable: true) {
-  id: Bytes!
-  handler: Bytes! # address
+type ChangedThreshold @entity {
+  id: ID!
+  safe: Bytes! # Address of the Gnosis Safe
+  threshold: BigInt! # New required number of confirmations
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type ChangedGuard @entity(immutable: true) {
-  id: Bytes!
-  guard: Bytes! # address
+type ExecutionSuccess @entity {
+  id: ID!
+  safe: Bytes! # Address of the Gnosis Safe
+  txHash: Bytes! # Transaction hash of the executed transaction
+  payment: BigInt! # Ether value of the transaction
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type ChangedThreshold @entity(immutable: true) {
-  id: Bytes!
-  threshold: BigInt! # uint256
+type ExecutionFailure @entity {
+  id: ID!
+  safe: Bytes! # Address of the Gnosis Safe
+  txHash: Bytes! # Transaction hash of the failed transaction
+  payment: BigInt! # Ether value of the transaction
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type DisabledModule @entity(immutable: true) {
-  id: Bytes!
-  module: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type EnabledModule @entity(immutable: true) {
-  id: Bytes!
-  module: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ExecutionFailure @entity(immutable: true) {
-  id: Bytes!
-  txHash: Bytes! # bytes32
-  payment: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ExecutionFromModuleFailure @entity(immutable: true) {
-  id: Bytes!
-  module: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ExecutionFromModuleSuccess @entity(immutable: true) {
-  id: Bytes!
-  module: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ExecutionSuccess @entity(immutable: true) {
-  id: Bytes!
-  txHash: Bytes! # bytes32
-  payment: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RemovedOwner @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type SafeReceived @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type SafeSetup @entity(immutable: true) {
-  id: Bytes!
-  initiator: Bytes! # address
-  owners: [Bytes!]! # address[]
-  threshold: BigInt! # uint256
-  initializer: Bytes! # address
-  fallbackHandler: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type SignMsg @entity(immutable: true) {
-  id: Bytes!
-  msgHash: Bytes! # bytes32
+type ProxyCreation @entity {
+  id: ID!
+  proxy: Bytes! # Address of the newly created proxy
+  singleton: Bytes! # Address of the singleton
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
