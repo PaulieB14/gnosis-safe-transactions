@@ -59,7 +59,7 @@ export function handleSafeSetup(event: SafeSetupEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.initiator = event.params.initiator
-  entity.owners = event.params.owners
+  entity.owners = event.params.owners.map((owner) => owner.toBytes())
   entity.threshold = event.params.threshold
   entity.initializer = event.params.initializer
   entity.fallbackHandler = event.params.fallbackHandler
