@@ -7,6 +7,14 @@ type ProxyCreation @entity {
   transactionHash: Bytes!
 }
 
+type RemovedOwner @entity {
+  id: ID!
+  owner: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type ExecutionSuccess @entity {
   id: ID!
   safe: Bytes! # Address of the Gnosis Safe that executed the transaction
