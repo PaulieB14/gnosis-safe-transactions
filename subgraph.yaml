@@ -34,16 +34,6 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - AddedOwner
-        - ApproveHash
-        - ChangedFallbackHandler
-        - ChangedGuard
-        - ChangedThreshold
-        - DisabledModule
-        - EnabledModule
-        - ExecutionFailure
-        - ExecutionFromModuleFailure
-        - ExecutionFromModuleSuccess
         - ExecutionSuccess
         - RemovedOwner
         - SafeReceived
