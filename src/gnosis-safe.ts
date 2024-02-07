@@ -58,8 +58,15 @@ export function handleSafeSetup(event: SafeSetupEvent): void {
   let entity = new SafeSetup(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
+
+  // Manual conversion of Address[] to Bytes[]
+  let ownersBytes: Bytes[] = new Array<Bytes>(event.params.owners.length)
+  for (let i = 0; i < event.params.owners.length; i++) {
+    ownersBytes[i] = event.params.owners[i].toBytes()
+  }
+  entity.owners = ownersBytes
+
   entity.initiator = event.params.initiator
-  entity.owners = event.params.owners.map((owner) => owner.toBytes())
   entity.threshold = event.params.threshold
   entity.initializer = event.params.initializer
   entity.fallbackHandler = event.params.fallbackHandler
