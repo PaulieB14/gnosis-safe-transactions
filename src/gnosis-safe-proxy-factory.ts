@@ -1,13 +1,20 @@
 import { ProxyCreation as ProxyCreationEvent } from '../generated/GnosisSafeProxyFactory/GnosisSafeProxyFactory'
 import { ProxyCreation } from '../generated/schema'
 
-export function handleYourEventName(event: YourEventType): void {
+export function handleProxyCreation(event: ProxyCreationEvent): void {
   let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
-  // Now 'id' is a string that combines the transaction hash and log index.
+  // 'id' uniquely identifies this ProxyCreation event instance.
 
-  // Use 'id' for your entity's ID or wherever you need a unique identifier
-  let entity = new YourEntityName(id)
-  // Set other properties on your entity...
+  let entity = new ProxyCreation(id)
+  // Assuming 'ProxyCreation' is the name of the entity in your GraphQL schema.
 
-  entity.save()
+  // Set properties on the entity based on the event parameters.
+  entity.proxy = event.params.proxy.toHex() // Convert Address to hex string.
+  entity.singleton = event.params.singleton.toHex() // Convert Address to hex string.
+
+  // Assuming your entity has fields for block number and timestamp.
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+
+  entity.save() // Save the entity to the store.
 }
