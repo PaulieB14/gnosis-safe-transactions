@@ -1,25 +1,7 @@
-type AddedOwner @entity {
+type ProxyCreation @entity {
   id: ID!
-  safe: Bytes! # Address of the Gnosis Safe
-  owner: Bytes! # Address of the owner added
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RemovedOwner @entity {
-  id: ID!
-  safe: Bytes! # Address of the Gnosis Safe
-  owner: Bytes! # Address of the owner removed
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ChangedThreshold @entity {
-  id: ID!
-  safe: Bytes! # Address of the Gnosis Safe
-  threshold: BigInt! # New required number of confirmations
+  proxy: Bytes! # Address of the newly created proxy
+  singleton: Bytes! # Address of the singleton
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -27,28 +9,9 @@ type ChangedThreshold @entity {
 
 type ExecutionSuccess @entity {
   id: ID!
-  safe: Bytes! # Address of the Gnosis Safe
+  safe: Bytes! # Address of the Gnosis Safe that executed the transaction
   txHash: Bytes! # Transaction hash of the executed transaction
   payment: BigInt! # Ether value of the transaction
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ExecutionFailure @entity {
-  id: ID!
-  safe: Bytes! # Address of the Gnosis Safe
-  txHash: Bytes! # Transaction hash of the failed transaction
-  payment: BigInt! # Ether value of the transaction
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ProxyCreation @entity {
-  id: ID!
-  proxy: Bytes! # Address of the newly created proxy
-  singleton: Bytes! # Address of the singleton
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
