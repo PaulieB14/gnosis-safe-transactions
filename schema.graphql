@@ -13,6 +13,7 @@ type SafeReceived @entity {
   value: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type SafeSetup @entity {
