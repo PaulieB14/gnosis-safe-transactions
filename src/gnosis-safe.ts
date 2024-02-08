@@ -1,3 +1,4 @@
+import { Bytes } from '@graphprotocol/graph-ts'
 import {
   ExecutionSuccess as ExecutionSuccessEvent,
   RemovedOwner as RemovedOwnerEvent,
@@ -13,10 +14,11 @@ import {
   SignMsg,
 } from '../generated/schema'
 
+// Example correction for handleExecutionSuccess
 export function handleExecutionSuccess(event: ExecutionSuccessEvent): void {
-  let entity = new ExecutionSuccess(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
+  let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
+
+  let entity = new ExecutionSuccess(id)
   entity.txHash = event.params.txHash
   entity.payment = event.params.payment
 
