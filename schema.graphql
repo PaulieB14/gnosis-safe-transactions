@@ -1,56 +1,89 @@
 type ProxyCreation @entity {
   id: ID!
-  proxy: Bytes! # Address of the newly created proxy
-  singleton: Bytes! # Address of the singleton
+  "Address of the newly created proxy"
+  proxy: Bytes!
+  "Address of the singleton"
+  singleton: Bytes!
+  "Block number where this event was recorded"
   blockNumber: BigInt!
+  "Timestamp of the block where this event was recorded"
   blockTimestamp: BigInt!
+  "Transaction hash of the event"
   transactionHash: Bytes!
 }
 
 type SafeReceived @entity {
   id: ID!
+  "Sender address of the transaction"
   sender: Bytes!
+  "Value received by the Safe"
   value: BigInt!
+  "Block number where this event was recorded"
   blockNumber: BigInt!
+  "Timestamp of the block where this event was recorded"
   blockTimestamp: BigInt!
+  "Transaction hash of the event"
   transactionHash: Bytes!
 }
 
 type SafeSetup @entity {
   id: ID!
-  initiator: Bytes! # Address of the user who initiated the setup
-  owners: [Bytes!]! # Addresses of the Safe owners
-  threshold: BigInt! # Minimum number of owners required to approve a transaction
-  initializer: Bytes! # Address of the contract or entity that initialized the setup
-  fallbackHandler: Bytes! # Address of the fallback handler
+  "Address of the user who initiated the setup"
+  initiator: Bytes!
+  "Addresses of the Safe owners"
+  owners: [Bytes!]!
+  "Minimum number of owners required to approve a transaction"
+  threshold: BigInt!
+  "Address of the contract or entity that initialized the setup"
+  initializer: Bytes!
+  "Address of the fallback handler"
+  fallbackHandler: Bytes!
+  "Block number where this event was recorded"
   blockNumber: BigInt!
+  "Timestamp of the block where this event was recorded"
   blockTimestamp: BigInt!
+  "Transaction hash of the event"
   transactionHash: Bytes!
 }
 
 type SignMsg @entity {
   id: ID!
-  signer: Bytes! # Address of the signer
-  messageHash: Bytes! # Hash of the signed message
+  "Address of the signer"
+  signer: Bytes!
+  "Hash of the signed message"
+  messageHash: Bytes!
+  "Block number where this event was recorded"
   blockNumber: BigInt!
+  "Timestamp of the block where this event was recorded"
   blockTimestamp: BigInt!
+  "Transaction hash of the event"
   transactionHash: Bytes!
 }
 
 type RemovedOwner @entity {
   id: ID!
+  "Address of the owner being removed"
   owner: Bytes!
+  "Block number where this event was recorded"
   blockNumber: BigInt!
+  "Timestamp of the block where this event was recorded"
   blockTimestamp: BigInt!
+  "Transaction hash of the event"
   transactionHash: Bytes!
 }
 
 type ExecutionSuccess @entity {
   id: ID!
-  safe: Bytes! # Address of the Gnosis Safe that executed the transaction
-  txHash: Bytes! # Transaction hash of the executed transaction
-  payment: BigInt! # Ether value of the transaction
+  "Address of the Gnosis Safe that executed the transaction"
+  safe: Bytes!
+  "Transaction hash of the executed transaction"
+  txHash: Bytes!
+  "Ether value of the transaction"
+  payment: BigInt!
+  "Block number where this event was recorded"
   blockNumber: BigInt!
+  "Timestamp of the block where this event was recorded"
   blockTimestamp: BigInt!
+  "Transaction hash of the event"
   transactionHash: Bytes!
 }
