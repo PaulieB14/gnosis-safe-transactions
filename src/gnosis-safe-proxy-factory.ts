@@ -1,3 +1,4 @@
+import { Bytes } from '@graphprotocol/graph-ts'
 import { ProxyCreation as ProxyCreationEvent } from '../generated/GnosisSafeProxyFactory/GnosisSafeProxyFactory'
 import { ProxyCreation } from '../generated/schema'
 
