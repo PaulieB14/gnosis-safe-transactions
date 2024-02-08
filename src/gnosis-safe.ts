@@ -14,7 +14,6 @@ import {
   SignMsg,
 } from '../generated/schema'
 
-// Example correction for handleExecutionSuccess
 export function handleExecutionSuccess(event: ExecutionSuccessEvent): void {
   let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
 
@@ -30,9 +29,9 @@ export function handleExecutionSuccess(event: ExecutionSuccessEvent): void {
 }
 
 export function handleRemovedOwner(event: RemovedOwnerEvent): void {
-  let entity = new RemovedOwner(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
+  let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
+
+  let entity = new RemovedOwner(id)
   entity.owner = event.params.owner
 
   entity.blockNumber = event.block.number
@@ -43,9 +42,9 @@ export function handleRemovedOwner(event: RemovedOwnerEvent): void {
 }
 
 export function handleSafeReceived(event: SafeReceivedEvent): void {
-  let entity = new SafeReceived(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
+  let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
+
+  let entity = new SafeReceived(id)
   entity.sender = event.params.sender
   entity.value = event.params.value
 
@@ -57,16 +56,12 @@ export function handleSafeReceived(event: SafeReceivedEvent): void {
 }
 
 export function handleSafeSetup(event: SafeSetupEvent): void {
-  let entity = new SafeSetup(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
+  let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
 
-  // Manual conversion of Address[] to Bytes[]
-  let ownersBytes: Bytes[] = new Array<Bytes>(event.params.owners.length)
-  for (let i = 0; i < event.params.owners.length; i++) {
-    ownersBytes[i] = event.params.owners[i].toBytes()
-  }
-  entity.owners = ownersBytes
+  let entity = new SafeSetup(id)
+
+  // Assuming event.params.owners is an array of addresses (Bytes)
+  entity.owners = event.params.owners
 
   entity.initiator = event.params.initiator
   entity.threshold = event.params.threshold
@@ -81,10 +76,10 @@ export function handleSafeSetup(event: SafeSetupEvent): void {
 }
 
 export function handleSignMsg(event: SignMsgEvent): void {
-  let entity = new SignMsg(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
-  entity.msgHash = event.params.msgHash
+  let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
+
+  let entity = new SignMsg(id)
+  entity.msgHash = event.params.msgHash // Assuming msgHash is of type Bytes
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
