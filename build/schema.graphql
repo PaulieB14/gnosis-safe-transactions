@@ -1,0 +1,56 @@
+type ProxyCreation @entity {
+  id: ID!
+  proxy: Bytes! # Address of the newly created proxy
+  singleton: Bytes! # Address of the singleton
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SafeReceived @entity {
+  id: ID!
+  sender: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SafeSetup @entity {
+  id: ID!
+  initiator: Bytes! # Address of the user who initiated the setup
+  owners: [Bytes!]! # Addresses of the Safe owners
+  threshold: BigInt! # Minimum number of owners required to approve a transaction
+  initializer: Bytes! # Address of the contract or entity that initialized the setup
+  fallbackHandler: Bytes! # Address of the fallback handler
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SignMsg @entity {
+  id: ID!
+  signer: Bytes! # Address of the signer
+  messageHash: Bytes! # Hash of the signed message
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RemovedOwner @entity {
+  id: ID!
+  owner: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExecutionSuccess @entity {
+  id: ID!
+  safe: Bytes! # Address of the Gnosis Safe that executed the transaction
+  txHash: Bytes! # Transaction hash of the executed transaction
+  payment: BigInt! # Ether value of the transaction
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
