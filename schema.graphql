@@ -15,6 +15,27 @@ type SafeReceived @entity {
   blockTimestamp: BigInt!
 }
 
+type SafeSetup @entity {
+  id: ID!
+  initiator: Bytes! # Address of the user who initiated the setup
+  owners: [Bytes!]! # Addresses of the Safe owners
+  threshold: BigInt! # Minimum number of owners required to approve a transaction
+  initializer: Bytes! # Address of the contract or entity that initialized the setup
+  fallbackHandler: Bytes! # Address of the fallback handler
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SignMsg @entity {
+  id: ID!
+  signer: Bytes! # Address of the signer
+  messageHash: Bytes! # Hash of the signed message
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type RemovedOwner @entity {
   id: ID!
   owner: Bytes!
