@@ -61,7 +61,7 @@ export function handleSafeSetup(event: SafeSetupEvent): void {
   let entity = new SafeSetup(id)
 
   // Assuming event.params.owners is an array of addresses (Bytes)
-  entity.owners = event.params.owners
+  entity.owners = entity.owners
 
   entity.initiator = event.params.initiator
   entity.threshold = event.params.threshold
@@ -79,7 +79,7 @@ export function handleSignMsg(event: SignMsgEvent): void {
   let id = event.transaction.hash.toHex() + '-' + event.logIndex.toString()
 
   let entity = new SignMsg(id)
-  entity.msgHash = event.params.msgHash // Assuming msgHash is of type Bytes
+  entity.messageHash = event.params.msgHash // Assuming msgHash is of type Bytes
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
